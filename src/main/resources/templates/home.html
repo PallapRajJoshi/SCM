@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+    <html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script})}">
+
+    <head>
+        <title>Home Page</title>
+    </head>
+<body>
+
+
+    <div id="content">Welcome TO  Home Page</div>
+
+
+    <script>
+
+        console.log("home page ")
+    </script>
+
+
+
+    <!--    npx tailwindcss -i src/main/resources/static/css/input.css -o src/main/resources/static/css/output.css --watch  -->
+    <div class=" bg-gray-200 w-1/2 p-4 mx-auto mt-4">
+        <h1 class="text-2 font-bold">Welcome to home page</h1>
+        <p class="text-xl">Name: <span data-th-text="${name}"></span></p>
+       <a th:href="${github_profile}">Click Here To Open Github Profile</a>
+        <p class="">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, nihil libero. Numquam, sapiente. Adipisci quod eaque sint corporis iusto expedita rem culpa nisi veritatis.
+        </p>
+    </div>
+
+
+
+
+   
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+</body>
+</html>
