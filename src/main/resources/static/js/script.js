@@ -1,7 +1,17 @@
 console.log("script loaded");
 let currentTheme = getTheme();
 //initial
-changeTheme();
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+    changeTheme();
+
+});
+
+
+
+
+
 // to change theme 
 function changeTheme() {
     //set to web page
