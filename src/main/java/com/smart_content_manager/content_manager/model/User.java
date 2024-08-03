@@ -1,28 +1,44 @@
 package com.smart_content_manager.content_manager.model;
-import org.springframework.data.annotation.Id;
 
+
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity(name="user")
-@Table(name="users")
+@Entity
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "users")
 public class User {
-@Id
-private String userId;
-private String name;
-private String email;
-private String password;
-private String about;
-private String profilePic;
-private String phoneNumber;
-private boolean enabled=false;
 
-private boolean emailVerified=false;
-private boolean phoneVerified=false;
+   @Id
+//    @GeneratedValue(strategy=GenerationType.IDENTITY)
+ 
+    private String userId;
+
+    private String name;
+    @Column(unique = true)
+    private String email;
+    private String password;
+    @Column(length = 1000)
+    private String about;
+    @Column(length = 1000)
+    private String profilePic;
+    private String phoneNumber;
+    private boolean enabled = false;
+
+    private boolean emailVerified = false;
+    private boolean phoneVerified = false;
 //self google etc
-private Providers provider=Providers.SELF;
-private String providerUserId;
-
-
+    private Providers provider = Providers.SELF;
+    private String providerUserId;
 
 }
