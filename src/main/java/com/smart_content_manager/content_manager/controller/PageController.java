@@ -3,6 +3,12 @@ package com.smart_content_manager.content_manager.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.smart_content_manager.content_manager.model.UserRegister;
+
 
 @Controller
 public class PageController {
@@ -42,9 +48,30 @@ public class PageController {
     }
 
     @GetMapping("/signup")
-    public String signup() {
+    public String signup(Model model) {
+
+        UserRegister userForm=new UserRegister();
+userForm.setName("pallap");
+userForm.setAbout(" welcome to about this application");
+        model.addAttribute("userForm", userForm);
 
         return "register";
     }
+
+
+//processing registered services
+@RequestMapping(value="/do-register", method=RequestMethod.POST)
+
+public String processRequest(@ModelAttribute UserRegister user) {
+//fetch data from form
+
+System.out.println(user);
+//validate 
+
+
+
+    return "redirect:/signup";
+}
+
 
 }
