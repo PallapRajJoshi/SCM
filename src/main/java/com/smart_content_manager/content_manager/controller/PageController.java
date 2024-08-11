@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.smart_content_manager.content_manager.helpers.Message;
+import com.smart_content_manager.content_manager.helpers.MessageType;
 import com.smart_content_manager.content_manager.model.User;
 import com.smart_content_manager.content_manager.model.UserRegister;
 import com.smart_content_manager.content_manager.services.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -70,7 +74,7 @@ userForm.setAbout(" welcome to about this application");
 //processing registered services
 @RequestMapping(value="/do-register", method=RequestMethod.POST)
 
-public String processRequest(@ModelAttribute UserRegister user) {
+public String processRequest(@ModelAttribute UserRegister user ,HttpSession session) {
 //fetch data from form
 
 
@@ -78,19 +82,30 @@ public String processRequest(@ModelAttribute UserRegister user) {
 
 
 //save to database
-User user1=User.builder()
-.name(user.getName())
-.email(user.getEmail())
-.password(user.getPassword())
-.about(user.getAbout())
-.phoneNumber(user.getPhoneNumber())
-.profilePic("https://static.vecteezy.com/system/resources/thumbnails/010/260/479/small/default-avatar-profile-icon-of-social-media-user-in-clipart-style-vector.jpg")
-.build();
+// User user1=User.builder()
+// .name(user.getName())
+// .email(user.getEmail())
+// .password(user.getPassword())
+// .about(user.getAbout())
+// .phoneNumber(user.getPhoneNumber())
+// .profilePic("https://static.vecteezy.com/system/resources/thumbnails/010/260/479/small/default-avatar-profile-icon-of-social-media-user-in-clipart-style-vector.jpg")
+// .build();
+
+User user1=new User();
+user1.setName(user.getName());
+user1.setEmail(user.getEmail());
+user1.setPassword(user.getPassword());
+user1.setAbout(user.getAbout());
+user1.setPhoneNumber(user.getPhoneNumber());
+user1.setProfilePic("https://static.vecteezy.com/system/resources/thumbnails/010/260/479/small/default-avatar-profile-icon-of-social-media-user-in-clipart-style-vector.jpg");
+
+
 User saveUser=userService.savUser(user1);
-System.out.println("User saved ");
 
 
+    Message.MessageBuilder message=Message.builder().content("Registration Successfully!!").type(MessageType.green);
 
+session.setAttribute("message", message);
     return "redirect:/signup";
 }
 
